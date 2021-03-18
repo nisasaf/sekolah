@@ -50,5 +50,5 @@ Route::namespace('API')
 
         //Berita
         Route::get('berita', 'BeritaController@index');
-        Route::get('kalender/{id}/{date}', 'KalenderController@index');
+        Route::get('kalender/{id}', 'KalenderController@index');
     });

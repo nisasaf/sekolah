@@ -44,8 +44,9 @@ class DaftarNilaiController extends Controller
                          ->get();
             // return response()->json($data);
         foreach ($data as $dt) {
-            $nilai[] = DaftarNilai::whereNotNull('nilai')->where('siswa_id', $dt->id)->get();
+            $nilai[] = DaftarNilai::where('siswa_id', $dt->id)->get();
         }
+        // dd($nilai[0][0]);
 
         $semester = Semester::whereId('user_id', auth()->user()->id)->orderBy('name')->get();
 

@@ -124,7 +124,9 @@
                                             <td class="text-center">{{ $pl->nama_guru ?? ''}}</td>
                                             @endforeach
                                             @for ($i = 0; $i < $jumlah_data; $i++)
-                                                <td><input type="number" id="nilai{{$obj->id}}" name="nilai[]" class="form-control form-control-sm" onchange="nilai_changed('{{ $obj->id }}')" value="{{$nilai[$i][0]->nilai}}"></td>
+                                                @for ($a = 0; $a < $jumlah_data; $a++)
+                                                <td><input type="number" id="nilai{{$obj->id}}" name="nilai[]" class="form-control form-control-sm" onchange="nilai_changed('{{ $obj->id }}')" value="{{$nilai[$i][$a]->nilai}}"></td>
+                                                @endfor
                                             @endfor
                                             <td><input type="text" id="nilai_rata" name="nilai_rata" class="form-control form-control-sm" disabled></td>
                                             <td id="submit_{{$obj->id}}" class="text-center">

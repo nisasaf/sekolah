@@ -111,6 +111,7 @@
                             <table id="order-table" class="table table-striped table-bordered nowrap shadow-sm">
                                 <thead class="text-left">
                                     <tr>
+                                        <th>ID Kelas</th>
                                         <th>Kelas</th>
                                         <th>ID Kelas</th>
                                         <th>Wali Kelas</th>

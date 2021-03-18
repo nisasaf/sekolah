@@ -15,7 +15,7 @@ class Calon extends Model
 
     protected $table = 'calon';
 	protected $fillable = [
-        'name', 'user_id'
+        'name', 'sekolah_id'
     ];
     protected $guarded = [];
 

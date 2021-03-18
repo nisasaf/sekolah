@@ -32,8 +32,10 @@ class PemilihanController extends Controller
         //         ->addIndexColumn()
         //         ->make(true);
         // }
-        $data_pemilihan = Pemilihan::orderBy('start_date')->get();
-        $ck = Calon::all();
+        $data_pemilihan = Pemilihan::orderBy('start_date')->where('sekolah_id', auth()->user()->id_sekolah)->get();
+        $ck = Calon::where('sekolah_id', auth()->user()->id_sekolah)->get();
+        // dd($ck);
+        // dd(auth()->user()->id_sekolah);
         $ps = Posisi::all();
         return view('admin.e-voting.pemilihan', [
             'ck' => $ck,

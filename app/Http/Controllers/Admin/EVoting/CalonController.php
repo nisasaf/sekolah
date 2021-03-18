@@ -9,16 +9,21 @@ use App\Models\Admin\Calon;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 
 class CalonController extends Controller
 {
     public function index(Request $request) {
+<<<<<<< HEAD
         $namaSiswa = Siswa::join('kelas', 'siswas.kelas_id', 'kelas.id')
             ->where('kelas.user_id', Auth::id())
             ->get('siswas.*');
+=======
+        $namaSiswa = Siswa::join('users', 'users.name', 'siswas.nama_lengkap')->where('id_sekolah', auth()->user()->id_sekolah)->get();
+        // dd($namaSiswa);
+>>>>>>> 2a5400e2499f2e564fd2785a5f444803f054d9d0
         if ($request->ajax()) {
-            $data = Calon::latest()->get();
+            $data = Calon::where('sekolah_id', auth()->user()->id_sekolah)->get();
+            // dd($data);
             return DataTables::of($data)
                 ->addColumn('action', function ($data) {
                     // $button = '<button type="button" id="'.$data->id.'" class="edit btn btn-mini btn-info shadow-sm">Edit</button>';
@@ -29,12 +34,20 @@ class CalonController extends Controller
                 ->addIndexColumn()
                 ->make(true);
         }
+<<<<<<< HEAD
         // return($namaSiswa);
+=======
+
+        
+>>>>>>> 2a5400e2499f2e564fd2785a5f444803f054d9d0
         return view('admin.e-voting.calon', ['namaSiswa' => $namaSiswa, 'mySekolah' => User::sekolah()]);
     }
 
     public function store(Request $request) {
         $data = $request->all();
+
+        $idSekolah = auth()->user()->id_sekolah;
+        // dd($idSekolah);exit();
 
         // validasi
         $rules = [
@@ -56,6 +69,7 @@ class CalonController extends Controller
 
         $status = Calon::create([
             'name'  => $request->input('nama_calon'),
+            'sekolah_id' => $idSekolah,
         ]);
 
         return response()
@@ -74,6 +88,7 @@ class CalonController extends Controller
     }
 
     public function update(Request $request) {
+        $idSekolah = auth()->user()->id_sekolah;
         // validasi
         $rules = [
             'calon_id'  => 'required|max:50',
@@ -93,7 +108,8 @@ class CalonController extends Controller
         }
 
         $status = Calon::whereId($request->input('hidden_id'))->update([
-            'name'  => $request->input('nama_calon')
+            'name'  => $request->input('nama_calon'),
+            'sekolah_id' => $idSekolah,
         ]);
 
         return response()
